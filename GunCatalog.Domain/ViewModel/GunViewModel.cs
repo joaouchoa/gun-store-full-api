@@ -1,12 +1,13 @@
 ﻿
 
 using GunCatalog.Domain.Enumerable;
+using System;
 
 namespace GunCatalog.Domain.ViewModel
 {
     public class GunViewModel
     {
-        public int Id { get; set; }
+        public Guid id { get; set; }
         public string? Fabricante { get; set; }
         public int Capacidade { get; set; }
         public string? Modelo { get; set; }

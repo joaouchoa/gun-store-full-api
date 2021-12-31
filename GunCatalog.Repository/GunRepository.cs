@@ -1,8 +1,10 @@
-﻿using System;
+﻿using GunCatalog.Repository.Interfaces;
+using System;
 
 namespace GunCatalog.Repository
 {
-    public class GunRepository
+    public class GunRepository : IGunRepository
     {
+
     }
 }

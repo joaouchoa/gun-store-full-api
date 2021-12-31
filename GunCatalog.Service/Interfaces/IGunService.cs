@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GunCatalog.Service.Interfaces
 {
-    public interface IGunService
+    public interface IGunService : IDisposable
     {
         Task<List<GunViewModel>> GetAsync(int page, int quantity);
         Task<GunViewModel> GetAsync(Guid id);

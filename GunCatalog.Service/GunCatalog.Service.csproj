@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GunCatalog.Domain\GunCatalog.Domain.csproj" />
+    <ProjectReference Include="..\GunCatalog.Repository\GunCatalog.Repository.csproj" />
   </ItemGroup>
 
 </Project>

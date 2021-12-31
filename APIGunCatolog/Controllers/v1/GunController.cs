@@ -1,5 +1,6 @@
 ﻿using GunCatalog.Domain.ImputModel;
 using GunCatalog.Domain.ViewModel;
+using GunCatalog.Service.Exceptions;
 using GunCatalog.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -51,7 +52,7 @@ namespace APIGunCatolog.Controllers.v1
                 var result = await _gunService.InsertAsync(gun);
                 return Ok(result);
             }
-            catch(Exception ex)
+            catch(GunHasSavedException ex)
             {
                 return UnprocessableEntity("Esse Armamento já esta cadastrado estoque");
             }
@@ -65,7 +66,7 @@ namespace APIGunCatolog.Controllers.v1
                 await _gunService.UpdateAsync(idGun, gun);
                 return Ok();
             }
-            catch (Exception ex)
+            catch (GunHasNotSavedException ex)
             {
                 return UnprocessableEntity("Este armamento não consta no Catalogo");
             }
@@ -79,7 +80,7 @@ namespace APIGunCatolog.Controllers.v1
                 await _gunService.UpdateAsync(idGun, preco);
                 return Ok();
             }
-            catch (Exception ex)
+            catch (GunHasNotSavedException ex)
             {
                 return UnprocessableEntity("Este armamento não consta no Catalogo");
             }
@@ -93,7 +94,7 @@ namespace APIGunCatolog.Controllers.v1
                 await _gunService.DeleteAsync(idGun);
                 return Ok();
             }
-            catch (Exception ex)
+            catch (GunHasNotSavedException ex)
             {
                 return UnprocessableEntity("Este armamento não consta no Catalogo");
             }
