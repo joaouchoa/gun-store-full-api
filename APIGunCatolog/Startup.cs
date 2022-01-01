@@ -1,3 +1,4 @@
+using GunCatalog.Domain.Middleware;
 using GunCatalog.Repository;
 using GunCatalog.Repository.Interfaces;
 using GunCatalog.Service;
@@ -8,7 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace APIGunCatolog
 {
@@ -32,6 +35,9 @@ namespace APIGunCatolog
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "APIGunCatolog", Version = "v1" });
+                var basePath = AppDomain.CurrentDomain.BaseDirectory;
+                var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
+                c.IncludeXmlComments(Path.Combine(basePath, fileName));
             });
         }
 
@@ -44,6 +50,8 @@ namespace APIGunCatolog
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "APIGunCatolog v1"));
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

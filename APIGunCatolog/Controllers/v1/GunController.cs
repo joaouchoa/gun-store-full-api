@@ -22,6 +22,16 @@ namespace APIGunCatolog.Controllers.v1
             _gunService = gunService;
         }
 
+        /// <summary>
+        /// Buscar todos as armas de forma paginada
+        /// </summary>
+        /// <remarks>
+        /// Não é possível retornar as armas sem paginação
+        /// </remarks>
+        /// <param name="pagina">Indica qual página está sendo consultada. Mínimo 1</param>
+        /// <param name="quantity">Indica a quantidade de reistros por página. Mínimo 1 e máximo 50</param>
+        /// <response code="200">Retorna a lista de armas</response>
+        /// <response code="204">Caso não haja arnas</response> 
         [HttpGet]
         public async Task<ActionResult<List<GunViewModel>>> Get([FromQuery, Range(1, int.MaxValue)] int pagina = 1, [FromQuery, Range(1,50)] int quantity = 5)
         {
@@ -33,6 +43,12 @@ namespace APIGunCatolog.Controllers.v1
             return Ok(resultList);
         }
 
+        /// <summary>
+        /// Buscar uma arma pelo seu Id
+        /// </summary>
+        /// <param name="idJogo">Id da arma buscado</param>
+        /// <response code="200">Retorna a arma filtrado</response>
+        /// <response code="204">Caso não haja arma com este id</response>   
         [HttpGet("{idGun:guid}")]
         public async Task<ActionResult> GetGunAsync([FromRoute] Guid IdGun)
         {
@@ -44,6 +60,11 @@ namespace APIGunCatolog.Controllers.v1
             return Ok(result);
         }
 
+        /// <summary>
+        /// Inserir uma arma no catálogo
+        /// </summary>
+        /// <param name="jogoInputModel">Dados da arma a ser inserido</param>
+        /// <response code="200">Caso a arma seja inserido com sucesso</response>  
         [HttpPost]
         public async Task<ActionResult<GunViewModel>> InsertGunAsync([FromBody] GunImputModel gun)
         {
@@ -58,6 +79,13 @@ namespace APIGunCatolog.Controllers.v1
             }
         }
 
+        /// <summary>
+        /// Atualizar uma Arma no catálogo
+        /// </summary>
+        /// /// <param name="idJogo">Id da arma a ser atualizado</param>
+        /// <param name="jogoInputModel">Novos dados para atualizar o jogo indicado</param>
+        /// <response code="200">Cao a arma seja atualizado com sucesso</response>
+        /// <response code="404">Caso não exista uma arma com este Id</response>  
         [HttpPut("{idGun:guid}")]
         public async Task<ActionResult> UpdateGunAsync([FromRoute]Guid idGun,[FromBody] GunImputModel gun)
         {
@@ -72,6 +100,13 @@ namespace APIGunCatolog.Controllers.v1
             }
         }
 
+        /// <summary>
+        /// Atualizar o preço de uma arma
+        /// </summary>
+        /// /// <param name="idJogo">Id da arma a ser atualizado</param>
+        /// <param name="preco">Novo preço do jogo</param>
+        /// <response code="200">Cao a arma seja atualizado com sucesso</response>
+        /// <response code="404">Caso não exista uma arma com este Id</response> 
         [HttpPatch("{idJogo:guid}/preco/{preco:double}")]
         public async Task<ActionResult> PatchGunAsync([FromRoute] Guid idGun, [FromRoute] double preco)
         {
@@ -86,6 +121,12 @@ namespace APIGunCatolog.Controllers.v1
             }
         }
 
+        /// <summary>
+        /// Excluir uma arma
+        /// </summary>
+        /// /// <param name="idJogo">Id da arma a ser excluído</param>
+        /// <response code="200">Cao o preço seja atualizado com sucesso</response>
+        /// <response code="404">Caso não exista uma arma com este Id</response>  
         [HttpDelete("{idGun:guid}")]
         public async Task<ActionResult> DeleteGunAsync([FromRoute] Guid idGun) 
         {
