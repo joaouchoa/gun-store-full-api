@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GunCatalog.Repository
 {
-    public class GunRepository : IGunRepository
+    public class GunRepositoryOnMemory : IGunRepository
     {
 
         private static Dictionary<Guid, Gun> gunList = new Dictionary<Guid, Gun>()

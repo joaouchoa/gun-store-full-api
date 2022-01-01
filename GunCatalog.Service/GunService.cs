@@ -22,7 +22,7 @@ namespace GunCatalog.Service
         }
         public async Task DeleteAsync(Guid id)
         {
-            var gunResult = _gunRepository.GetAsync(id);
+            var gunResult = await _gunRepository.GetAsync(id);
 
             if (gunResult == null)
                 throw new GunHasSavedException();

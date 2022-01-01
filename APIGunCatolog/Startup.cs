@@ -26,7 +26,7 @@ namespace APIGunCatolog
         {
 
             services.AddScoped<IGunService, GunService>();
-            services.AddScoped<IGunRepository, GunRepository>();
+            services.AddScoped<IGunRepository, GunRepositorySqlServer>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
