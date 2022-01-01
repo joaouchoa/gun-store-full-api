@@ -70,7 +70,7 @@ namespace GunCatalog.Service
 
             if (result.Count > 0) 
             {
-                throw new GunHasNotSavedException();
+                throw new GunHasSavedException();
             }
 
             var gunInsert = new Gun
@@ -103,7 +103,7 @@ namespace GunCatalog.Service
             var gunResult = await _gunRepository.GetAsync(id);
 
             if(gunResult == null)
-                throw new GunHasSavedException();
+                throw new GunHasNotSavedException();
 
             gunResult.Modelo = gun.Modelo;
             gunResult.Fabricante = gun.Fabricante;

@@ -12,8 +12,8 @@ namespace GunCatalog.Repository.Interfaces
         Task<List<Gun>> GetListAsync(int pagina, int quantity);
         Task<Gun> GetAsync(Guid id);
         Task<List<Gun>> GetAsync(string nome, string produtora);
-        Task<Gun> InsertAsync(Gun gun);
-        Task<Gun> UpdateAsync(Gun gun);
+        Task InsertAsync(Gun gun);
+        Task UpdateAsync(Gun gun);
         Task DeleteAsync(Guid id);
     }
 }

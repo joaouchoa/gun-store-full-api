@@ -34,7 +34,7 @@ namespace APIGunCatolog.Controllers.v1
         }
 
         [HttpGet("{idGun:guid}")]
-        public async Task<ActionResult<GunViewModel>> GetGunAsync([FromRoute] Guid IdGun)
+        public async Task<ActionResult> GetGunAsync([FromRoute] Guid IdGun)
         {
             var result = await _gunService.GetAsync(IdGun);
 
@@ -45,7 +45,7 @@ namespace APIGunCatolog.Controllers.v1
         }
 
         [HttpPost]
-        public async Task<ActionResult<GunImputModel>> InsertGunAsync([FromBody] GunImputModel gun)
+        public async Task<ActionResult<GunViewModel>> InsertGunAsync([FromBody] GunImputModel gun)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace APIGunCatolog.Controllers.v1
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{idGun:guid}")]
         public async Task<ActionResult> DeleteGunAsync([FromRoute] Guid idGun) 
         {
             try
